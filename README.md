@@ -68,7 +68,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
     git clone "homepage": "https://Jerem16.github.io/argent_bank",
     ```
 
-!INFO!
+**INFO**
 
 -   [NodeJS (**version 18.17.1**)](https://nodejs.org/en/)
 -   [Yarn](https://yarnpkg.com/)
