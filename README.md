@@ -68,12 +68,10 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
     git clone "homepage": "https://Jerem16.github.io/argent_bank",
     ```
 
-[!NOTE]
-
 -   [NodeJS (**version 18.17.1**)](https://nodejs.org/en/)
 -   [Yarn](https://yarnpkg.com/)
-
-If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
+    > [!NOTE]
+    > If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
 
 -Front
 
