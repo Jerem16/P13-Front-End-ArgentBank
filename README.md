@@ -71,7 +71,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 -   [NodeJS (**version 18.17.1**)](https://nodejs.org/en/)
 -   [Yarn](https://yarnpkg.com/)
 
-> **Note**
+> [!NOTE]  
 > If you are working with several versions of NodeJS, we recommend you install [nvm](https://github.com/nvm-sh/nvm). This tool will allow you to easily manage your NodeJS versions.
 
 -Front
