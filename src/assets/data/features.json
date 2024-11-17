@@ -1,0 +1,20 @@
+[
+    {
+        "id": "h_feat1",
+        "icon": "icon-chat.svg",
+        "title": "You are our #1 priority",
+        "description": "Need to talk to a representative? You can get in touch through our 24/7 chat or through a phone call in less than 5 minutes."
+    },
+    {
+        "id": "h_feat2",
+        "icon": "icon-money.svg",
+        "title": "More savings means higher rates",
+        "description": "The more you save with us, the higher your interest rate will be!"
+    },
+    {
+        "id": "h_feat3",
+        "icon": "icon-security.svg",
+        "title": "Security you can trust",
+        "description": "We use top of the line encryption to make sure your data and money is always safe."
+    }
+]

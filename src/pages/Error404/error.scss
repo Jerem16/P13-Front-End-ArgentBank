@@ -1,0 +1,45 @@
+$Primary: #00bb78;
+
+.error-404 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    color: $Primary;
+    background-color: #12002b;
+    text-align: center;
+
+    .borderError {
+        min-width: 50%;
+        min-height: 50vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        .error-404_h1 {
+            font-size: 25vw;
+            color: $Primary;
+            border: 1px solid $Primary;
+            padding: 0 20px;
+            margin: 20px;
+        }
+
+        .error-404_p {
+            font-size: 1.4rem;
+            span {
+                font-weight: bold;
+            }
+        }
+
+        .error-404_a {
+            text-decoration: underline;
+            color: $Primary;
+            display: block;
+            margin-top: 15px;
+            font-size: 1.4rem;
+        }
+    }
+}

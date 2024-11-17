@@ -1,0 +1,174 @@
+.collapse-content {
+    position: relative;
+    top: -5px;
+    z-index: 0;
+    display: block;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+
+    &.closed {
+        height: 0;
+        padding: 0;
+        overflow: hidden;
+        margin: 0 0 0 0;
+    }
+    &.opened {
+        height: auto;
+    }
+    &.transitioning {
+        transition: height 0.4s ease-in-out, padding 0.4s ease-in-out;
+    }
+}
+.rotate {
+    transform: rotate(180deg);
+}
+
+.open .rotate {
+    transform: rotate(0);
+}
+.fa-check,
+.fa-pencil {
+    padding-left: 10px;
+}
+.transactions {
+    width: 80%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.transactions-labels,
+.transactions-details {
+    // margin-bottom: 20px;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    .transaction-label {
+        color: white;
+        font-weight: bold;
+        margin-bottom: 0px;
+    }
+
+    .transaction-label,
+    .transaction-value {
+        text-align: left;
+        flex: 1;
+        max-width: 19%;
+    }
+}
+.transaction-value {
+    color: lightgrey;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    max-height: 30px;
+}
+
+.transaction-icone {
+    width: 20px;
+}
+
+.transactionsColumnDetail {
+    display: flex;
+    flex-flow: column;
+    background-color: #007b55;
+    border-radius: 5px;
+    max-height: auto;
+    margin-bottom: 20px;
+}
+.transactions_Collapsed-Details {
+    // margin-bottom: 20px;
+    width: 100%;
+    padding: 10px 20px 0px 20px;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+.transaction-input {
+    border: 0px solid white;
+    text-align: left;
+    flex: 1;
+    max-width: 75.5%;
+    color: lightgrey;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    max-height: 30px;
+    background: transparent;
+    font-size: 1rem;
+}
+
+@media (max-width: 720px) {
+    .transactions {
+        width: 90%;
+        margin: 0 auto;
+        box-sizing: border-box;
+        text-align: left;
+        margin-bottom: 2rem;
+    }
+    .transaction-input,
+    .transactions-labels,
+    .transactions-details {
+        padding: 0;
+        display: inline-flex;
+        flex-flow: row;
+        justify-content: space-between;
+        margin: 0;
+
+        .transaction-label {
+            color: white;
+            font-weight: normal;
+            margin: 0;
+            min-width: 20%;
+        }
+        .transaction-icone {
+            width: 20px;
+            padding: 0 5px 0 0;
+        }
+
+        .transaction-label,
+        .transaction-value {
+            padding: 0 0 0 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+    .transactions_Collapsed-Details {
+        width: 100%;
+        padding: 10px 5px 5px 5px;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        box-sizing: border-box;
+        font-size: 0.8rem;
+
+        label {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 20%;
+            flex: 1;
+        }
+    }
+    .transaction-input {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        i {
+            float: right;
+            padding-right: 5px;
+        }
+    }
+}

@@ -1,0 +1,77 @@
+.accountPage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #fff;
+    width: 90%;
+    flex-direction: column;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    text-align: left;
+    margin: 2rem auto;
+    border-radius: 5px;
+}
+
+.account-amount {
+    position: relative;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.account-amount-description {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.account-title {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.account-content-wrapper {
+    width: 100%;
+    flex: 1;
+    a {
+        color: transparent;
+        button {
+            cursor: pointer;
+        }
+    }
+}
+
+@media (min-width: 720px) {
+    .accountPage {
+        flex-direction: row;
+        width: 80%;
+    }
+
+    .account-content-wrapper.cta {
+        flex: 0;
+    }
+
+    .account-amount {
+        font-size: 2.5rem;
+        .fa-times {
+            font-size: 2.5rem;
+        }
+    }
+
+    .account-amount-description {
+        font-size: 0.9rem;
+    }
+
+    .account-title {
+        font-size: 1rem;
+    }
+}
+.fa-times {
+    float: right;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    height: 1.5rem;
+    padding: 0.35rem 0;
+}
