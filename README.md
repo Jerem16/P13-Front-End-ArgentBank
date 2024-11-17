@@ -1,4 +1,4 @@
-# Argent Bank - Application bancaire
+# Front-End Argent Bank - Application bancaire
 
 Bienvenue sur le dépôt de **Argent Bank**, une application bancaire permettant aux utilisateurs de gérer leurs comptes en ligne. Ce projet a été développé avec **React**, **Redux**, et consomme une API REST documentée via **Swagger**.
 
