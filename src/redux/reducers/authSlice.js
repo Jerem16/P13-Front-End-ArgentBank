@@ -16,8 +16,11 @@ const prep = async (di, ge) => {
     }
     di(actions.pending());
 };
-const err = async (di, err) => {
-    di(actions.rejected(err.message));
+const err = async (dispatch, error) => {
+    // Vérifie si un code d'erreur est présent
+    const errorMessage = error.response?.status === 400 ? 400 : error.message;
+
+    dispatch(actions.rejected(errorMessage));
 };
 
 export const loginUser = (email, password) => async (dispatch, getState) => {
@@ -25,17 +28,14 @@ export const loginUser = (email, password) => async (dispatch, getState) => {
         prep(dispatch, getState);
         const response = await ApiBase(
             `/login`,
-            {
-                email,
-                password,
-            },
+            { email, password },
             axios.post
         );
-        const resultValue = await response.token;
+        const resultValue = response.token;
         dispatch(actions.loginUser(resultValue));
         splitAndStoreToken(resultValue);
     } catch (error) {
-        err(dispatch, error);
+        err(dispatch, error); // Gestion améliorée des erreurs
     }
 };
 
@@ -145,6 +145,7 @@ const { actions, reducer } = createSlice({
 
         rejected: (draft, action) => {
             draft.status = "rejected";
+            draft.isLoading = false;
             draft.error = action.payload;
         },
 

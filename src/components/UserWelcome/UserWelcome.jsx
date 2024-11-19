@@ -16,7 +16,7 @@ function UserProfile() {
 
     const handleEditClick = () => {
         setIsEditing(true);
-        navigate("/argent_bank/user/profile");
+        navigate("/user/profile");
     };
 
     const handleEditFormClose = () => {

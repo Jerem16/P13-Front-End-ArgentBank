@@ -4,7 +4,7 @@ import Logo from "../../assets/img/argentBankLogo.svg";
 
 function LogoLink() {
     return (
-        <Link to="/argent_bank/" className="main-nav-logo">
+        <Link to="/" className="main-nav-logo">
             <img
                 className="main-nav-logo-image"
                 src={Logo}

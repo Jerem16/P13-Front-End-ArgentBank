@@ -11,3 +11,4 @@ export const selectFirstName = (state) => state.users.userData.firstName;
 export const selectLastName = (state) => state.users.userData.lastName;
 
 export const selectError = (state) => state.users.error;
+

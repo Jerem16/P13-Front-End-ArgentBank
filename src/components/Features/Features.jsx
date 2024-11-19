@@ -1,6 +1,7 @@
 import "./features.scss";
 import React, { useEffect, useState } from "react";
 import featuresData from "../../assets/data/features.json";
+import Loader from "../Loader/Loader";
 
 function Features() {
     const [imagesLoaded, setImagesLoaded] = useState(false);
@@ -48,8 +49,12 @@ function Features() {
                     </div>
                 ))
             ) : (
-                // Affichez un loader ou un message de chargement ici
-                <div className="loader">Chargement en cours...</div>
+                <div className="feature-item">
+                    <Loader />
+                    <h3 className="loader-wrapper, feature-item-title">
+                        Chargement en cours...
+                    </h3>
+                </div>
             )}
         </section>
     );

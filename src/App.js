@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Header from "./components/Header/Header";
@@ -8,8 +8,8 @@ import Login from "./pages/Login/Login";
 
 import UserAccount from "./pages/UserAccount/UserAccount";
 import UserTransactions from "./pages/UserTransactions/UserTransactions";
-import Error404 from "./pages/Error404/Error404";
-import ErrorAuth from "./pages/ErrorAuth/ErrorAuth";
+import Error404 from "./pages/ErrorPages/Error404";
+import ErrorAuth from "./pages/ErrorPages/ErrorAuth";
 import Footer from "./components/Footer/Footer";
 import { getUserProfile, getMyToken } from "./redux/reducers/authSlice";
 import { combineStoredToken } from "./redux/reducers/token";
@@ -17,6 +17,7 @@ import {
     selectToken,
     selectUserData,
     selectAuth,
+    selectError,
 } from "./redux/selector/selector";
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
     const token = useSelector(selectToken);
     const data = useSelector(selectUserData);
     const authenticated = useSelector(selectAuth);
-
+    const error = useSelector(selectError);
     useEffect(() => {
         const memToken = combineStoredToken();
 
@@ -36,44 +37,38 @@ function App() {
         }
     }, [dispatch, token, data]);
 
-    // useEffect(() => {
-    //     if (token && !data) {
-    //         dispatch(getUserProfile());
-    //     }
-    // }, [dispatch, token, data]);
-
     return (
-        <BrowserRouter>
+        <>
             <Header />
             <Routes>
                 <>
-                    <Route path="/argent_bank/" element={<Home />} />
-                    <Route path="/argent_bank/login" element={<Login />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
 
                     {authenticated ? (
                         <>
+                            <Route path="/user" element={<UserAccount />} />
                             <Route
-                                path="/argent_bank/user"
+                                path="/user/profile"
                                 element={<UserAccount />}
                             />
                             <Route
-                                path="/argent_bank/user/profile"
-                                element={<UserAccount />}
-                            />
-                            <Route
-                                path="/argent_bank/user/account/:id"
+                                path="/user/account/:id"
                                 element={<UserTransactions />}
                             />
                         </>
                     ) : (
-                        <Route path="*" element={<ErrorAuth />} />
+                        <Route path="/" element={<Home />} />
                     )}
-
-                    <Route path="*" element={<Error404 />} />
+                    {error ? (
+                        <Route path="*" element={<ErrorAuth />} />
+                    ) : (
+                        <Route path="*" element={<Error404 />} />
+                    )}
                 </>
             </Routes>
             <Footer />
-        </BrowserRouter>
+        </>
     );
 }
 

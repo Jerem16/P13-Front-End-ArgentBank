@@ -32,7 +32,7 @@ function EditForm({ onClose }) {
         const updatedUserName = { userName: newUserName };
         dispatch(updateProfile(token, updatedUserName))
             .then(() => {
-                navigate("/argent_bank/user");
+                navigate("/user");
                 onClose();
             })
             .catch((error) => {

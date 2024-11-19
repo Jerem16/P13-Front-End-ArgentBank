@@ -19,7 +19,7 @@ function Account() {
                         </p>
                     </div>
                     <div className="account-content-wrapper cta">
-                        <Link to={`/argent_bank/user/account/${account.id}`}>
+                        <Link to={`/user/account/${account.id}`}>
                             <button className="transaction-button">
                                 View transactions
                             </button>

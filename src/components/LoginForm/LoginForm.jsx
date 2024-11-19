@@ -31,7 +31,7 @@ function LoginForm() {
         dispatch(loginUser(email, password))
             .then(() => {
                 handleRememberMeChange();
-                navigate("/argent_bank/user");
+                navigate("/user");
             })
             .catch((error) => {
                 alert("Connection error. Please try Again.", error);

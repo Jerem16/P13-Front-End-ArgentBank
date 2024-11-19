@@ -36,7 +36,7 @@ function Account() {
                         <h3 className="account-title">{account.title}</h3>
                         <p className="account-amount">
                             {account.amount}{" "}
-                            <Link to={`/argent_bank/user`}>
+                            <Link to={`/user`}>
                                 <i
                                     className="fa fa-times"
                                     aria-hidden="true"

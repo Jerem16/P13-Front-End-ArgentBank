@@ -5,10 +5,20 @@
     // flex-flow: column wrap;
     padding: 5px 20px;
     .main-nav-col {
-        // display: flex;
-        // flex-flow: row wrap;
-        // justify-content: flex-end;
-        // padding: 0 0 15px 0px;
+        button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            text-align: left;
+            padding: 0;
+            font-weight: bold;
+            font-size: 1rem;
+            max-width: 100px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
     a {
         font-weight: bold;
@@ -22,7 +32,6 @@
             text-decoration: none;
             margin-right: 0.5rem;
             min-width: 100px;
-            // border: 1px solid #000;
             text-align: right;
 
             &:hover {

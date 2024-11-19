@@ -81,6 +81,22 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 3. node -v
 4. npm install / yarn install
 
+you have two users in your database:
+
+### Tony Stark
+
+-   First Name: `Tony`
+-   Last Name: `Stark`
+-   Email: `tony@stark.com`
+-   Password: `password123`
+
+### Steve Rogers
+
+-   First Name: `Steve`,
+-   Last Name: `Rogers`,
+-   Email: `steve@rogers.com`,
+-   Password: `password456`
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

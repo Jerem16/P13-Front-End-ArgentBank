@@ -11,7 +11,7 @@ function ErrorAuth() {
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            navigate("/argent_bank/login");
+            navigate("/login");
         }, countdown * 1000);
 
         const intervalId = setInterval(() => {
@@ -39,7 +39,7 @@ function ErrorAuth() {
                     Redirecting in {countdown} seconds...
                 </p>
 
-                <Link to="/argent_bank/login" className="error-404_a">
+                <Link to="/login" className="error-404_a">
                     Return to the login page
                 </Link>
             </div>
