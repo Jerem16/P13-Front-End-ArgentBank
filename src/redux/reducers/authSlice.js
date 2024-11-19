@@ -1,32 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { selectToken, selectStatus } from "../selector/selector";
-import { splitAndStoreToken, clearStoredToken } from "./token";
+import { splitAndStoreToken, clearStoredToken } from "../../utils/token";
 
 const URL = "http://localhost:3001/api/v1/user";
 
-const ApiBase = async (url, data = {}, M = axios.post, headers = {}) => {
-    const response = await M(`${URL}${url}`, data, { headers });
+const apiRequest = async (
+    url,
+    data = {},
+    method = axios.post,
+    headers = {}
+) => {
+    const response = await method(`${URL}${url}`, data, { headers });
     return response.data.body;
 };
-const prep = async (di, ge) => {
-    const status = selectStatus(ge());
+
+const prepareRequest = async (dispatch, getState) => {
+    const status = selectStatus(getState());
     if (status === "pending" || status === "updating") {
         return;
     }
-    di(actions.pending());
+    dispatch(actions.pending());
 };
-const err = async (dispatch, error) => {
-    // Vérifie si un code d'erreur est présent
-    const errorMessage = error.response?.status === 400 ? 400 : error.message;
 
+const handleError = async (dispatch, error) => {
+    const errorMessage = error.response?.status === 400 ? 400 : error.message;
     dispatch(actions.rejected(errorMessage));
 };
 
 export const loginUser = (email, password) => async (dispatch, getState) => {
     try {
-        prep(dispatch, getState);
-        const response = await ApiBase(
+        prepareRequest(dispatch, getState);
+        const response = await apiRequest(
             `/login`,
             { email, password },
             axios.post
@@ -35,7 +40,7 @@ export const loginUser = (email, password) => async (dispatch, getState) => {
         dispatch(actions.loginUser(resultValue));
         splitAndStoreToken(resultValue);
     } catch (error) {
-        err(dispatch, error); // Gestion améliorée des erreurs
+        handleError(dispatch, error);
     }
 };
 
@@ -43,45 +48,50 @@ export const getUserProfile = () => async (dispatch, getState) => {
     const token = selectToken(getState());
     if (token) {
         try {
-            prep(dispatch, getState);
+            prepareRequest(dispatch, getState);
             const headers = {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             };
-            const response = await ApiBase(`/profile`, {}, axios.post, headers);
+            const response = await apiRequest(
+                `/profile`,
+                {},
+                axios.post,
+                headers
+            );
             const resultValue = await response;
 
             await dispatch(actions.getUserProfile(resultValue));
         } catch (error) {
-            err(dispatch, error);
+            handleError(dispatch, error);
         }
     }
 };
 
 export const updateProfile = (token, body) => async (dispatch, getState) => {
     try {
-        prep(dispatch, getState);
+        prepareRequest(dispatch, getState);
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         };
-        const response = await ApiBase(`/profile`, body, axios.put, headers);
+        const response = await apiRequest(`/profile`, body, axios.put, headers);
         const resultValue = await response.userName;
 
         await dispatch(actions.updateUserProfile(resultValue));
     } catch (error) {
-        err(dispatch, error);
+        handleError(dispatch, error);
     }
 };
 
-export const getMyToken = (memToken) => async (dispatch, getState) => {
+export const rememberToken = (memToken) => async (dispatch, getState) => {
     const token = selectToken(getState());
     if (!token) {
         dispatch(actions.sendToken(memToken));
     }
 };
 
-export const deco = () => async (dispatch) => {
+export const logoutUser = () => async (dispatch) => {
     clearStoredToken();
     dispatch(actions.logout());
 };
@@ -94,12 +104,13 @@ const initialState = {
     userData: null,
     error: null,
 };
+
 const resolved = {
     status: "resolved",
     isAuth: true,
-
     error: null,
 };
+
 const { actions, reducer } = createSlice({
     name: "users",
     initialState,

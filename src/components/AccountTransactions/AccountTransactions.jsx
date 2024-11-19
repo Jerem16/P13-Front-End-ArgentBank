@@ -25,7 +25,6 @@ function AccountTransactions() {
     if (selectedAccount) {
         transactions = selectedAccount.transactions;
     } else {
-        console.log("Compte introuvable.");
         return <div>Compte introuvable.</div>;
     }
 
@@ -70,7 +69,7 @@ function AccountTransactions() {
                 <div>
                     {transactions.map((transaction, index) => (
                         <div
-                            className="transactionsColumnDetail"
+                            className="transactions-row-detail"
                             key={transaction.transactionID}
                         >
                             <span className="transactions-details">
@@ -86,8 +85,8 @@ function AccountTransactions() {
                                 <p className="transaction-value">
                                     {transaction.balance}
                                 </p>
-                                <p
-                                    className="transaction-icone"
+                                <button
+                                    className="transaction-icon"
                                     onClick={() =>
                                         handleTransactionClick(
                                             transaction.transactionID
@@ -108,7 +107,7 @@ function AccountTransactions() {
                                             transition: "all 0.3s ease-in-out",
                                         }}
                                     ></i>
-                                </p>
+                                </button>
                             </span>
                             <TransactionDetails
                                 key={transaction.transactionID}

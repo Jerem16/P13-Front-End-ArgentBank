@@ -3,7 +3,7 @@ import { loginUser } from "../../redux/reducers/authSlice";
 import { useNavigate } from "react-router-dom";
 import { selectIsLoading } from "../../redux/selector/selector";
 import { useDispatch, useSelector } from "react-redux";
-import { clearStoredToken } from "../../redux/reducers/token";
+import { clearStoredToken } from "../../utils/token";
 import "./loginForm.scss";
 import Loader from "../Loader/Loader";
 

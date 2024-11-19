@@ -13,6 +13,7 @@ export function combineStoredToken() {
     const cookies = document.cookie.split(";");
     const tokenPart2 = localStorage.getItem("secure_token_part2");
     let tokenPart1 = null;
+
     for (const cookie of cookies) {
         const [name, value] = cookie.trim().split("=");
         if (name === "secure_token_part1") {
@@ -20,9 +21,11 @@ export function combineStoredToken() {
             break;
         }
     }
+
     if (!tokenPart1 || !tokenPart2) {
         return null;
     }
+    
     const completeToken = tokenPart1 + tokenPart2;
 
     return completeToken;

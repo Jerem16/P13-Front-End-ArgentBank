@@ -69,11 +69,16 @@
     max-height: 30px;
 }
 
-.transaction-icone {
+.transaction-icon {
+    background: none;
+    border: none;
+    color: inherit;
     width: 20px;
+    height: 50px;
+    cursor: pointer;
 }
 
-.transactionsColumnDetail {
+.transactions-row-detail {
     display: flex;
     flex-flow: column;
     background-color: #007b55;
@@ -103,6 +108,17 @@
     max-height: 30px;
     background: transparent;
     font-size: 1rem;
+    input {
+        background: #fff;
+        border-radius: 5px;
+        padding: 5px 10px;
+        border: none;
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    i {
+        cursor: pointer;
+    }
 }
 
 @media (max-width: 720px) {

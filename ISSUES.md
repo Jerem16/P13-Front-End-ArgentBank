@@ -41,8 +41,6 @@ Ce fichier documente les tâches principales à réaliser dans le projet, class�
     1. Créez la route `/`.
     2. Intégrez les assets graphiques et textuels.
     3. Testez l'affichage sur différentes tailles d'écran.
--   **Ressources** :
-    -   [Maquettes Figma](https://figma.com/project-url)
 -   **Critères d'acceptation** :
     -   La page est responsive.
     -   Respect des guidelines de design.

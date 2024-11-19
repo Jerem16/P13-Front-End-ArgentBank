@@ -7,7 +7,7 @@ function ErrorAuth() {
 
     const [countdown, setCountdown] = useState(4);
 
-    const num = 399 + countdown;
+    const num = countdown * 100 + 1;
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -25,7 +25,7 @@ function ErrorAuth() {
     }, [navigate, countdown]);
 
     return (
-        <main className="error-404">
+        <main className="error-401">
             <div className="borderError">
                 <h1 className="error-404_h1">{num}</h1>
                 <p className="error-404_p">

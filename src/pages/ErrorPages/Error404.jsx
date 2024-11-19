@@ -4,9 +4,7 @@ import "./error.scss";
 
 function Error404() {
     const navigate = useNavigate();
-
     const [countdown, setCountdown] = useState(4);
-
     const num = 399 + countdown;
 
     useEffect(() => {
@@ -23,6 +21,7 @@ function Error404() {
             clearInterval(intervalId);
         };
     }, [navigate, countdown]);
+
     return (
         <main className="error-404">
             <div className="borderError">

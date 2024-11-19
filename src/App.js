@@ -11,8 +11,8 @@ import UserTransactions from "./pages/UserTransactions/UserTransactions";
 import Error404 from "./pages/ErrorPages/Error404";
 import ErrorAuth from "./pages/ErrorPages/ErrorAuth";
 import Footer from "./components/Footer/Footer";
-import { getUserProfile, getMyToken } from "./redux/reducers/authSlice";
-import { combineStoredToken } from "./redux/reducers/token";
+import { getUserProfile, rememberToken } from "./redux/reducers/authSlice";
+import { combineStoredToken } from "./utils/token";
 import {
     selectToken,
     selectUserData,
@@ -30,7 +30,7 @@ function App() {
         const memToken = combineStoredToken();
 
         if (memToken && !token) {
-            dispatch(getMyToken(memToken));
+            dispatch(rememberToken(memToken));
         }
         if (token && !data) {
             dispatch(getUserProfile());

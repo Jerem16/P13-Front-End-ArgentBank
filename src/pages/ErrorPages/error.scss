@@ -1,5 +1,6 @@
 $Primary: #00bb78;
 
+.error-401,
 .error-404 {
     flex: 1;
     display: flex;
@@ -7,7 +8,6 @@ $Primary: #00bb78;
     align-items: center;
     justify-content: center;
     color: #fff;
-    color: $Primary;
     background-color: #12002b;
     text-align: center;
 
@@ -40,6 +40,18 @@ $Primary: #00bb78;
             display: block;
             margin-top: 15px;
             font-size: 1.4rem;
+        }
+    }
+}
+.error-401 {
+    background-color: #005733;
+    .borderError {
+        .error-404_h1 {
+            color: #fff;
+            border: 1px solid #fff;
+        }
+        .error-404_a {
+            color: #fff;
         }
     }
 }
