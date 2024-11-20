@@ -4,6 +4,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
+    min-height: 300px;
     position: relative;
 
     .hero-content {
@@ -30,6 +31,7 @@
     @media (min-width: 920px) {
         background-image: url("../../assets/img/bank-tree.webp");
         height: calc(100vh - 505px);
+
         background-position: 0% 33%;
 
         .hero-content {

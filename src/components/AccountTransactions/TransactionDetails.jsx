@@ -1,33 +1,27 @@
-// TransactionDetails.jsx
 import React, { useState } from "react";
 
 function TransactionDetails({
     transaction,
-    handleSaveChanges, 
+    handleSaveChanges,
     isOpen,
     onClick,
 }) {
-    
     const [editableCategory, setEditableCategory] = useState("");
     const [editableNote, setEditableNote] = useState("");
     const [isEditingCategory, setIsEditingCategory] = useState(false);
     const [isEditingNote, setIsEditingNote] = useState(false);
 
-    
     const startEditingCategory = () => {
         setEditableCategory(transaction.category);
         setIsEditingCategory(true);
     };
 
-    
     const startEditingNote = () => {
         setEditableNote(transaction.note);
         setIsEditingNote(true);
     };
 
-    
     const saveChanges = () => {
-       
         handleSaveChanges(
             editableCategory,
             editableNote,
@@ -61,9 +55,9 @@ function TransactionDetails({
                 />
             </div>
             <div className="transactions_Collapsed-Details">
-                <label htmlFor="Category" className="transaction-value">
+                <p htmlFor="Category" className="transaction-value">
                     Category
-                </label>
+                </p>
                 <div className="transaction-input">
                     {isEditingCategory ? (
                         <>
@@ -84,7 +78,7 @@ function TransactionDetails({
                         </>
                     ) : (
                         <>
-                            <span>{editableCategory}</span>
+                            <span>{transaction.category}</span>
                             <i
                                 onClick={startEditingCategory}
                                 className="fa fa-pencil"
@@ -95,9 +89,9 @@ function TransactionDetails({
                 </div>
             </div>
             <div className="transactions_Collapsed-Details">
-                <label htmlFor="Note" className="transaction-value">
+                <p htmlFor="Note" className="transaction-value">
                     Note
-                </label>
+                </p>
                 <div className="transaction-input">
                     {isEditingNote ? (
                         <>

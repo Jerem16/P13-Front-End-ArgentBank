@@ -120,7 +120,27 @@
         cursor: pointer;
     }
 }
+.save-icon {
+    cursor: pointer;
+    color: green;
+    transition: color 0.3s;
+}
+.save-icon:hover {
+    color: darkgreen;
+}
 
+.collapse-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.collapse-content.opened {
+    max-height: 1000px;
+    transform: scaleY(1);
+}
+.collapse-content.closed {
+    max-height: 0;
+    transform: scaleY(0);
+}
 @media (max-width: 720px) {
     .transactions {
         width: 90%;

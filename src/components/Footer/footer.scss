@@ -2,9 +2,16 @@
     display: flex;
     justify-content: center;
     border-top: 2px solid #ccc;
-    padding: 2rem 0 1.5rem;
+    box-sizing: border-box;
+    width: 100%;
+    // padding: 2rem 0 1.5rem;
+    min-height: 74px;
+    // position: absolute;
+    z-index: 1000;
+    bottom: 0;
+    // background: red;
     .footer-text {
-        margin: 0;
+        margin: 2rem 0 1.5rem;
         padding: 0;
     }
 }
