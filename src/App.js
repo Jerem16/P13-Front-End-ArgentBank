@@ -60,7 +60,7 @@ function App() {
                     ) : (
                         <Route path="/" element={<Home />} />
                     )}
-                    
+
                     {error ? (
                         <Route path="*" element={<ErrorAuth />} />
                     ) : (

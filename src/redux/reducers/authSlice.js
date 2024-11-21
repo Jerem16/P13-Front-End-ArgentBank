@@ -1,46 +1,93 @@
-import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
+import { apiRequest, prepareRequest, handleError } from "../../utils/api";
 import { selectToken, selectStatus } from "../selector/selector";
 import { splitAndStoreToken, clearStoredToken } from "../../utils/token";
 
-const URL = "http://localhost:3001/api/v1/user";
-
-const apiRequest = async (
-    url,
-    data = {},
-    method = axios.post,
-    headers = {}
-) => {
-    const response = await method(`${URL}${url}`, data, { headers });
-    return response.data.body;
+const initialState = {
+    status: "void",
+    isAuth: false,
+    isLoading: false,
+    token: null,
+    userData: null,
+    error: null,
 };
 
-const prepareRequest = async (dispatch, getState) => {
-    const status = selectStatus(getState());
-    if (status === "pending" || status === "updating") {
-        return;
-    }
-    dispatch(actions.pending());
+const accreditedState = {
+    status: "resolved",
+    isAuth: true,
+    error: null,
 };
 
-const handleError = async (dispatch, error) => {
-    const errorMessage = error.response?.status === 400 ? 400 : error.message;
-    dispatch(actions.rejected(errorMessage));
-};
+const { actions, reducer } = createSlice({
+    name: "users",
+    initialState,
+    reducers: {
+        pendingAction: (draft) => {
+            draft.isLoading = true;
+            if (["void", "updating"].includes(draft.status))
+                draft.status = "pending";
+            if (draft.status === "resolved") draft.status = "updating";
+            if (draft.status === "rejected") {
+                draft.error = null;
+                draft.status = "pending";
+            }
+        },
+        rejectedAction: (draft, action) => {
+            draft.status = "rejected";
+            draft.isLoading = false;
+            draft.error = action.payload;
+        },
 
+        getTokenAction: (draft, action) => {
+            if (["pending", "updating"].includes(draft.status)) {
+                Object.assign(draft, accreditedState);
+                draft.token = action.payload;
+            }
+        },
+        pushTokenAction: (draft, action) => {
+            draft.isAuth = true;
+            draft.token = action.payload;
+        },
+
+        getUserProfileAction: (draft, action) => {
+            if (["pending", "updating"].includes(draft.status)) {
+                Object.assign(draft, accreditedState);
+                draft.userData = action.payload;
+                draft.isLoading = false;
+            }
+        },
+        updateUserNameAction: (draft, action) => {
+            if (["pending", "updating"].includes(draft.status)) {
+                Object.assign(draft, accreditedState);
+                draft.userData.userName = action.payload;
+                draft.isLoading = false;
+            }
+        },
+        logoutAction: () => initialState,
+    },
+});
+
+export default reducer;
+export const {
+    pendingAction,
+    getTokenAction,
+    getUserProfileAction,
+    updateUserNameAction,
+    rejectedAction,
+    pushTokenAction,
+    logoutAction,
+} = actions;
+
+// Thunks
 export const loginUser = (email, password) => async (dispatch, getState) => {
+    if (!prepareRequest(dispatch, getState, actions, selectStatus)) return;
     try {
-        prepareRequest(dispatch, getState);
-        const response = await apiRequest(
-            `/login`,
-            { email, password },
-            axios.post
-        );
-        const resultValue = response.token;
-        dispatch(actions.loginUser(resultValue));
-        splitAndStoreToken(resultValue);
+        const { token } = await apiRequest("/login", { email, password });
+        dispatch(getTokenAction(token));
+        splitAndStoreToken(token);
     } catch (error) {
-        handleError(dispatch, error);
+        handleError(dispatch, error, actions);
     }
 };
 
@@ -48,7 +95,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
     const token = selectToken(getState());
     if (token) {
         try {
-            prepareRequest(dispatch, getState);
+            prepareRequest(dispatch, getState, actions, selectStatus);
             const headers = {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
@@ -61,16 +108,16 @@ export const getUserProfile = () => async (dispatch, getState) => {
             );
             const resultValue = await response;
 
-            await dispatch(actions.getUserProfile(resultValue));
+            await dispatch(actions.getUserProfileAction(resultValue));
         } catch (error) {
-            handleError(dispatch, error);
+            handleError(dispatch, error, actions);
         }
     }
 };
 
 export const updateProfile = (token, body) => async (dispatch, getState) => {
     try {
-        prepareRequest(dispatch, getState);
+        prepareRequest(dispatch, getState, actions, selectStatus);
         const headers = {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -78,95 +125,20 @@ export const updateProfile = (token, body) => async (dispatch, getState) => {
         const response = await apiRequest(`/profile`, body, axios.put, headers);
         const resultValue = await response.userName;
 
-        await dispatch(actions.updateUserProfile(resultValue));
+        await dispatch(actions.updateUserNameAction(resultValue));
     } catch (error) {
-        handleError(dispatch, error);
+        handleError(dispatch, error, actions);
     }
 };
 
 export const rememberToken = (memToken) => async (dispatch, getState) => {
     const token = selectToken(getState());
     if (!token) {
-        dispatch(actions.sendToken(memToken));
+        dispatch(actions.pushTokenAction(memToken));
     }
 };
 
 export const logoutUser = () => async (dispatch) => {
     clearStoredToken();
-    dispatch(actions.logout());
+    dispatch(actions.logoutAction());
 };
-
-const initialState = {
-    status: "void",
-    isAuth: false,
-    isLoading: false,
-    token: null,
-    userData: null,
-    error: null,
-};
-
-const resolved = {
-    status: "resolved",
-    isAuth: true,
-    error: null,
-};
-
-const { actions, reducer } = createSlice({
-    name: "users",
-    initialState,
-    reducers: {
-        pending: (draft) => {
-            draft.isLoading = true;
-            if (draft.status === "void" || draft.status === "updating") {
-                draft.status = "pending";
-                return;
-            }
-            if (draft.status === "resolved") {
-                draft.status = "updating";
-                return;
-            }
-            if (draft.status === "rejected") {
-                draft.error = null;
-                draft.status = "pending";
-                return;
-            }
-        },
-
-        loginUser: (draft, action) => {
-            if (draft.status === "pending" || draft.status === "updating") {
-                Object.assign(draft, resolved);
-                draft.token = action.payload;
-            }
-        },
-
-        getUserProfile: (draft, action) => {
-            if (draft.status === "pending" || draft.status === "updating") {
-                Object.assign(draft, resolved);
-                draft.userData = action.payload;
-                draft.isLoading = false;
-            }
-        },
-        updateUserProfile: (draft, action) => {
-            if (draft.status === "pending" || draft.status === "updating") {
-                Object.assign(draft, resolved);
-                draft.userData.userName = action.payload;
-                draft.isLoading = false;
-            }
-        },
-
-        rejected: (draft, action) => {
-            draft.status = "rejected";
-            draft.isLoading = false;
-            draft.error = action.payload;
-        },
-
-        sendToken: (draft, action) => {
-            draft.isAuth = true;
-            draft.token = action.payload;
-        },
-
-        logout: () => initialState,
-    },
-});
-
-export default reducer;

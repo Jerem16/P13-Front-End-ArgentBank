@@ -58,9 +58,10 @@ function UserProfile() {
                                 <span className="loading-dots">
                                     {loadingText}
                                 </span>
-                                <br />
-                                <Loader />
+                                {/* <br /> */}
                             </h1>
+                            <Loader />
+                            <br />
                         </>
                     )}
 
@@ -74,8 +75,3 @@ function UserProfile() {
 }
 
 export default UserProfile;
-const a1 = "3px 3px";
-const a2 = "5px 3px";
-const a3 = "7px 10px";
-const a4 = "9px 30px";
-const a5 = "10px 50px";

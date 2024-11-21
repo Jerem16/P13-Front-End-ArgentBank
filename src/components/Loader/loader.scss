@@ -25,21 +25,36 @@
 @keyframes pulse {
     0%,
     100% {
+        filter: drop-shadow(0 0 10px rgba(0, 187, 120, 0.75))
+            drop-shadow(0 0 20px rgba(0, 187, 120, 0.5))
+            drop-shadow(0 0 30px transparent);
+    }
+    50% {
+        filter: drop-shadow(0 0 15px #005733 rgba(0, 87, 51, 0.85))
+            drop-shadow(0 0 30px rgba(0, 187, 120, 0.35))
+            drop-shadow(0 0 40px rgba(0, 187, 120, 0));
+    }
+}
+@keyframes inPulse {
+    0%,
+    100% {
         box-shadow: 0 0 10px #00bb78, 0 0 20px #00bb78, 0 0 30px transparent;
     }
     50% {
-        box-shadow: 0 0 15px #005733, 0 0 25px #005733, 0 0 40px #00bb78;
+        box-shadow: 0 0 15px #005733, 0 0 25px #005733, 0 0 40px transparent;
     }
 }
-
 .loading {
     display: inline-block;
     padding: 20px;
     border: 6px solid transparent;
     border-radius: 50%;
+    border-bottom: none; //Style test
     height: 60px;
     width: 60px;
-    animation: rotate 1.5s infinite linear, pulse 2s infinite ease-in-out;
+    animation: rotate 1.5s infinite linear, pulse 2s infinite ease-in-out,
+        inPulse 2s infinite ease-in-out;
+    background: transparent;
 }
 
 @keyframes rikSpikeRoll {
@@ -73,5 +88,5 @@
         linear-gradient(#007b55 50px, transparent 0);
     background-position: 0 center, 15px center, 30px center, 45px center,
         60px center, 75px center, 90px center, 105px center;
-    animation: rikSpikeRoll 1.5s linear infinite;
+    animation: rikSpikeRoll 1.5s linear infinite, pulse 2s infinite ease-in-out;
 }

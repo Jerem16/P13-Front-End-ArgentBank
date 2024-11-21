@@ -52,7 +52,7 @@ function Features() {
                 <div className="feature-item">
                     <Loader />
                     <h3 className="loader-wrapper, feature-item-title">
-                        Chargement en cours...
+                        Chargement en cours
                     </h3>
                 </div>
             )}
