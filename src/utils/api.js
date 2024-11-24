@@ -2,13 +2,18 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:3001/api/v1/user";
 
-export const apiRequest = async (
+export const apiPostRequest = async (
     url,
     data = {},
     method = axios.post,
     headers = {}
 ) => {
     const response = await method(`${BASE_URL}${url}`, data, { headers });
+    return response.data.body;
+};
+
+export const apiGetRequest = async (url, method = axios.get, headers = {}) => {
+    const response = await method(`${BASE_URL}${url}`, { headers });
     return response.data.body;
 };
 

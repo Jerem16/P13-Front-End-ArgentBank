@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./error.scss";
 
-function ErrorAuth() {
+function Error401() {
     const navigate = useNavigate();
 
     const [countdown, setCountdown] = useState(4);
@@ -47,4 +47,4 @@ function ErrorAuth() {
     );
 }
 
-export default ErrorAuth;
+export default Error401;

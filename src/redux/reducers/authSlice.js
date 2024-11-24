@@ -1,6 +1,11 @@
 import axios from "axios";
 import { createSlice } from "@reduxjs/toolkit";
-import { apiRequest, prepareRequest, handleError } from "../../utils/api";
+import {
+    apiPostRequest,
+    apiGetRequest,
+    prepareRequest,
+    handleError,
+} from "../../utils/api";
 import { selectToken, selectStatus } from "../selector/selector";
 import { splitAndStoreToken, clearStoredToken } from "../../utils/token";
 
@@ -83,7 +88,7 @@ export const {
 export const loginUser = (email, password) => async (dispatch, getState) => {
     if (!prepareRequest(dispatch, getState, actions, selectStatus)) return;
     try {
-        const { token } = await apiRequest("/login", { email, password });
+        const { token } = await apiPostRequest("/login", { email, password });
         dispatch(getTokenAction(token));
         splitAndStoreToken(token);
     } catch (error) {
@@ -100,18 +105,18 @@ export const getUserProfile = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             };
-            const response = await apiRequest(
+
+            const response = await apiGetRequest(
                 `/profile`,
-                {},
-                axios.post,
+                axios.get,
                 headers
             );
-            const resultValue = await response;
-
-            await dispatch(actions.getUserProfileAction(resultValue));
+            dispatch(getUserProfileAction(response));
         } catch (error) {
             handleError(dispatch, error, actions);
         }
+    } else {
+        console.error("Token introuvable !");
     }
 };
 
@@ -122,10 +127,13 @@ export const updateProfile = (token, body) => async (dispatch, getState) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
         };
-        const response = await apiRequest(`/profile`, body, axios.put, headers);
-        const resultValue = await response.userName;
-
-        await dispatch(actions.updateUserNameAction(resultValue));
+        const response = await apiPostRequest(
+            `/profile`,
+            body,
+            axios.put,
+            headers
+        );
+        dispatch(updateUserNameAction(response.userName));
     } catch (error) {
         handleError(dispatch, error, actions);
     }
@@ -134,11 +142,11 @@ export const updateProfile = (token, body) => async (dispatch, getState) => {
 export const rememberToken = (memToken) => async (dispatch, getState) => {
     const token = selectToken(getState());
     if (!token) {
-        dispatch(actions.pushTokenAction(memToken));
+        dispatch(pushTokenAction(memToken));
     }
 };
 
 export const logoutUser = () => async (dispatch) => {
     clearStoredToken();
-    dispatch(actions.logoutAction());
+    dispatch(logoutAction());
 };

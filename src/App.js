@@ -9,7 +9,7 @@ import Login from "./pages/Login/Login";
 import UserAccount from "./pages/UserAccount/UserAccount";
 import UserTransactions from "./pages/UserTransactions/UserTransactions";
 import Error404 from "./pages/ErrorPages/Error404";
-import ErrorAuth from "./pages/ErrorPages/ErrorAuth";
+import Error401 from "./pages/ErrorPages/Error401";
 import Footer from "./components/Footer/Footer";
 import { getUserProfile, rememberToken } from "./redux/reducers/authSlice";
 import { combineStoredToken } from "./utils/token";
@@ -62,7 +62,8 @@ function App() {
                     )}
 
                     {error ? (
-                        <Route path="*" element={<ErrorAuth />} />
+                        // <Route path="*" element={<ErrorAuth />} />
+                        <Route path="*" element={<Error401 />} />
                     ) : (
                         <Route path="*" element={<Error404 />} />
                     )}
