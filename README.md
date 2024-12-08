@@ -80,6 +80,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 2. nvm use 18.17.1
 3. node -v
 4. npm install / yarn install
+5. npm start / yarn start
 
 you have two users in your database:
 

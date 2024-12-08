@@ -9,7 +9,32 @@
     background-color: #00bc77;
     color: #fff;
 }
+.error-message {
+    color: #d93025; /* Rouge vif pour indiquer une erreur */
+    font-size: 14px; /* Taille de police adaptée pour la lisibilité */
+    font-weight: bold; /* Mettre en évidence le message */
+    margin-top: 5px; /* Espacement pour séparer du champ */
+    padding: 5px; /* Ajout d'un padding pour l'espacement interne */
+    border: 1px solid #f4cccc; /* Bordure subtile autour */
+    background-color: #fdecea; /* Fond doux pour signaler une erreur */
+    border-radius: 4px; /* Coins arrondis pour un look moderne */
+    display: inline-block; /* S'aligne avec son contenu */
+}
 
+/* Ajout pour les lecteurs d'écran */
+.error-message:before {
+    content: "⚠️ "; /* Icône d'avertissement (si compatible) */
+    margin-right: 5px;
+}
+
+/* Assurez une bonne visibilité sur un fond sombre */
+@media (prefers-color-scheme: dark) {
+    .error-message {
+        color: #ff9494;
+        background-color: #4a0000;
+        border-color: #ff9494;
+    }
+}
 .sign-in-content {
     box-sizing: border-box;
     background-color: white;

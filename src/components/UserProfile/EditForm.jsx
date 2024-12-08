@@ -17,27 +17,40 @@ function EditForm({ onClose }) {
 
     const token = useSelector(selectToken);
 
-    const userName = useSelector(selectUserName);
+    const userName = useSelector(selectUserName); // Ancien userName
     const firstName = useSelector(selectFirstName);
     const lastName = useSelector(selectLastName);
 
     const [newUserName, setNewUserName] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+
+    const isAlphanumeric = (str) => /^[a-zA-Z0-9]*$/.test(str); // Fonction de validation
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // Validation des caractères alphanumériques
         if (newUserName.trim() === "") {
-            alert("User Name cannot be empty.");
+            setErrorMessage("User Name cannot be empty.");
             return;
         }
+
+        if (!isAlphanumeric(newUserName)) {
+            setErrorMessage(
+                "User Name can only contain alphanumeric characters."
+            );
+            setNewUserName(userName); // Restaurer l'ancien userName
+            return;
+        }
+
         const updatedUserName = { userName: newUserName };
         dispatch(updateProfile(token, updatedUserName))
             .then(() => {
                 navigate("/user");
                 onClose();
             })
-            .catch((error) => {
-                dispatch(error);
-                alert("Connection error. Please try Again.");
+            .catch(() => {
+                setErrorMessage("Connection error. Please try again.");
             });
     };
 
@@ -52,17 +65,26 @@ function EditForm({ onClose }) {
                 Edit user info
                 <br />
             </h1>
-            <form className="UserSettings">
+            <form className="UserSettings" onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="user_Name">User Name</label>
                     <input
                         type="text"
                         id="user_Name"
                         placeholder={userName}
-                        onChange={(e) => setNewUserName(e.target.value)}
+                        value={newUserName} // Contrôle la valeur saisie
+                        onChange={(e) => {
+                            setNewUserName(e.target.value);
+                            setErrorMessage(""); // Réinitialise le message d'erreur
+                        }}
                         required
                     />
                 </div>
+                {errorMessage && (
+                    <div className="error-message" style={{ color: "red" }}>
+                        {errorMessage}
+                    </div>
+                )}
                 <div>
                     <label htmlFor="first_Name">First name</label>
                     <input
@@ -84,11 +106,7 @@ function EditForm({ onClose }) {
                     />
                 </div>
                 <div className="wrapper-button buttons">
-                    <button
-                        type="submit"
-                        className="edit-button"
-                        onClick={handleSubmit}
-                    >
+                    <button type="submit" className="edit-button">
                         Save
                     </button>
                     <button

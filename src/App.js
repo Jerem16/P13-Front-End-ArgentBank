@@ -62,7 +62,6 @@ function App() {
                     )}
 
                     {error ? (
-                        // <Route path="*" element={<ErrorAuth />} />
                         <Route path="*" element={<Error401 />} />
                     ) : (
                         <Route path="*" element={<Error404 />} />
