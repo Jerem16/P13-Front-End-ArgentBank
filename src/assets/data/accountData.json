@@ -83,26 +83,6 @@
                     "note": "Lorem ipsum"
                 },
                 {
-                    "transactionID": "h8i9a1b2c3d4e5f6",
-                    "date": "2023-02-19T10:30:00.000Z",
-                    "description": "Grocery Store",
-                    "amount": "$-120.00",
-                    "balance": "$48,773.93",
-                    "type": "Electronic",
-                    "category": "Groceries",
-                    "note": "Lorem ipsum"
-                },
-                {
-                    "transactionID": "i9a1b2c3d4e5f6g7",
-                    "date": "2023-02-18T15:45:30.871Z",
-                    "description": "Coffee Shop",
-                    "amount": "$-4.50",
-                    "balance": "$48,778.43",
-                    "type": "Card Payment",
-                    "category": "Food",
-                    "note": "Lorem ipsum"
-                },
-                {
                     "transactionID": "a2b3c4d5e6f7g8h9i1",
                     "date": "2023-02-17T11:20:00.000Z",
                     "description": "Online Store",
@@ -159,26 +139,6 @@
                     "balance": "$48,453.93",
                     "type": "Card Payment",
                     "category": "Food",
-                    "note": "Lorem ipsum"
-                },
-                {
-                    "transactionID": "e5f6g7h8i9a1b2c3",
-                    "date": "2023-02-22T09:00:00.000Z",
-                    "description": "Online Store",
-                    "amount": "$-85.00",
-                    "balance": "$48,538.93",
-                    "type": "Electronic",
-                    "category": "Shopping",
-                    "note": "Lorem ipsum"
-                },
-                {
-                    "transactionID": "f6g7h8i9a1b2c3d4",
-                    "date": "2023-02-21T12:30:40.592Z",
-                    "description": "Gas Station",
-                    "amount": "$-40.00",
-                    "balance": "$48,578.93",
-                    "type": "Gas",
-                    "category": "Transportation",
                     "note": "Lorem ipsum"
                 },
                 {
@@ -288,26 +248,6 @@
                     "balance": "$48,578.93",
                     "type": "Gas",
                     "category": "Transportation",
-                    "note": "Lorem ipsum"
-                },
-                {
-                    "transactionID": "g7h8i9a1b2c3d4e5",
-                    "date": "2023-02-20T18:22:15.750Z",
-                    "description": "Restaurant",
-                    "amount": "$-75.00",
-                    "balance": "$48,653.93",
-                    "type": "Card Payment",
-                    "category": "Food",
-                    "note": "Lorem ipsum"
-                },
-                {
-                    "transactionID": "h8i9a1b2c3d4e5f6",
-                    "date": "2023-02-19T10:30:00.000Z",
-                    "description": "Grocery Store",
-                    "amount": "$-120.00",
-                    "balance": "$48,773.93",
-                    "type": "Electronic",
-                    "category": "Groceries",
                     "note": "Lorem ipsum"
                 },
                 {
